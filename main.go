@@ -35,6 +35,7 @@ func main() {
 	commandRegistry.Register("reset",commands.HandlerReset)
 	commandRegistry.Register("users",commands.HandlerUsers)
 	commandRegistry.Register("agg",commands.HandlerAgg)
+	commandRegistry.Register("addfeed",commands.HandlerAddFeed)
 
 
 
