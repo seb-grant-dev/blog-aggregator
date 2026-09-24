@@ -36,7 +36,7 @@ func main() {
 	commandRegistry.Register("users",commands.HandlerUsers)
 	commandRegistry.Register("agg",commands.HandlerAgg)
 	commandRegistry.Register("addfeed",commands.HandlerAddFeed)
-
+	commandRegistry.Register("feeds",commands.HandlerFeeds)
 
 
 	// Get the command name and arguments
