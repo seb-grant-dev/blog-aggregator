@@ -32,6 +32,7 @@ func main() {
 	commandRegistry := commands.NewCommandRegistry()
 	commandRegistry.Register("login",commands.HandlerLogin)
 	commandRegistry.Register("register",commands.HandlerRegister)
+	commandRegistry.Register("reset",commands.HandlerReset)
 
 
 
