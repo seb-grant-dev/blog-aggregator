@@ -1,23 +1,37 @@
 package main
 
+import _ "github.com/lib/pq"
+
 import (
 	"fmt"
 	"os"
+	"database/sql"
 	"github.com/seb-grant-dev/blog-aggregator/internal/config"
+	"github.com/seb-grant-dev/blog-aggregator/internal/database"
 	"github.com/seb-grant-dev/blog-aggregator/commands"
 	"github.com/seb-grant-dev/blog-aggregator/state"
 )
 
 func main() {
 
+
 	cfg := config.Read()
 	appState := state.State{
-		Config: cfg,
+		Config: &cfg,
 	}
+
+	db, err := sql.Open("postgres",cfg.DBUrl)
+	if err != nil {
+		fmt.Printf("Error: Could not connect to database: %s\n",err)
+	}
+	dbQueries := database.New(db)
+	appState.DB = dbQueries
+
 
 	// Register the command registry
 	commandRegistry := commands.NewCommandRegistry()
 	commandRegistry.Register("login",commands.HandlerLogin)
+	commandRegistry.Register("register",commands.HandlerRegister)
 
 
 
@@ -33,7 +47,7 @@ func main() {
 
 
 	// Run the actual command
-	err := commandRegistry.Run(&appState,cmd)
+	err = commandRegistry.Run(&appState,cmd)
 	if err != nil {
 		fmt.Printf("Error: %s\n",err)
 		os.Exit(1)

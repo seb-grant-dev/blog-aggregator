@@ -53,12 +53,14 @@ func Read() Config {
 
 // Package-private helper functions
 func getConfigFilePath() (string,error) {
-	configDir,err := os.UserConfigDir()
-	if err != nil {
-		return "", err
-	}
-
-	fullPathParts := []string{configDir,"gator",configFileName}
+	// configDir,err := os.UserConfigDir()
+	// if err != nil {
+	// 	return "", err
+	// }
+	//
+	// fullPathParts := []string{configDir,"gator",configFileName}
+	homeDir,_ := os.UserHomeDir()
+	fullPathParts := []string{homeDir,configFileName}
 	fullPath := filepath.Join(fullPathParts...)
 	return fullPath,nil
 }

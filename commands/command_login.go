@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"context"
 	"github.com/seb-grant-dev/blog-aggregator/state"
 )
 
@@ -12,10 +13,18 @@ func HandlerLogin(s *state.State, cmd command) error {
 	}
 
 	username := cmd.arguments[0]
-	err := s.Config.SetUser(username)
-	if err != nil {
-		return err
+
+	ctx := context.Background()
+	_, err := s.DB.GetUser(ctx,username)
+	if err == nil {
+
+		err := s.Config.SetUser(username)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("User logged in: %s\n",username)
+		return nil
 	}
-	fmt.Printf("User logged in: %s\n",username)
-	return nil
+
+	return fmt.Errorf("Username [%s] not found, please try again.",username)
 }
