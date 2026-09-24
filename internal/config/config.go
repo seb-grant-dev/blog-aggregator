@@ -15,26 +15,25 @@ type Config struct {
 }
 
 // Struct Methods
-func (c *Config) SetUser(username string) {
+func (c *Config) SetUser(username string) error {
 	// Update config struct with username
 	c.CurrentUserName = username
 	// Write back to config file
 	err := write(c)
 	if err != nil {
-		fmt.Errorf("Config could not be updated. %s",err)
+		return fmt.Errorf("Config could not be updated. %s",err)
 	}
 
-	fmt.Println("Config updated.")
+	return nil
 }
 
 // Package-global public functions
-func Read() (Config) {
+func Read() Config {
 	configPath,err := getConfigFilePath()
 	if err != nil {
 		fmt.Printf("Error retrieving config file path. %s",err)
 		os.Exit(1)
 	}
-	fmt.Printf("Reading config from %s\n",configPath)
 	// Read config file from home directory
 	fileContents, err := os.ReadFile(configPath)
 	if err != nil {
