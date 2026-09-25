@@ -35,12 +35,27 @@ func HandlerAddFeed(s *state.State, cmd command) error{
 	}
 
 	newFeed,err := s.DB.AddFeed(ctx,addFeedParams)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("New Feed added: %+v",newFeed)
+
+	newId := uuid.New()
+	_, err = s.DB.FollowFeed(ctx, database.FollowFeedParams{
+		ID: newId,
+		UserID: currUser.ID,
+		FeedID: newFeed.ID,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	})
 
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("New Record: %+v",newFeed)
+	fmt.Printf("Success: %s is now following %s (%s)\n",currUser.Name,newFeed.Name,newFeed.Url)
+
 
 	return nil
 }
