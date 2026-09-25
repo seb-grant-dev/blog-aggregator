@@ -1,4 +1,4 @@
-# Blog Aggregator
+# Gator
 
 A simple CLI application for subscribing to and reading RSS feeds and posts.
 
