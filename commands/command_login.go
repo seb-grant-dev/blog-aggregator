@@ -6,7 +6,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/state"
 )
 
-func HandlerLogin(s *state.State, cmd command) error {
+func HandlerLogin(s *state.State, cmd Command) error {
 
 	if len(cmd.arguments) != 1 {
 		return fmt.Errorf("Login expects 1 argument <username>")

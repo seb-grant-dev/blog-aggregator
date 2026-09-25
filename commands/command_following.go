@@ -4,22 +4,21 @@ import (
 	"fmt"
 	"context"
 	"github.com/seb-grant-dev/blog-aggregator/state"
+	"github.com/seb-grant-dev/blog-aggregator/internal/database"
 )
 
 
 
 
-func HandlerFollowing(s *state.State, cmd command) error {
+func HandlerFollowing(s *state.State, cmd Command, currUser database.User) error {
 
 	if len(cmd.arguments) != 0 {
 		fmt.Errorf("This command does not require any inputs. Ignoring...")
 	}
 
-	currUser := s.Config.CurrentUserName
-
 	ctx := context.Background()
 
-	feeds, err := s.DB.GetFeedFollowsForUser(ctx,currUser)
+	feeds, err := s.DB.GetFeedFollowsForUser(ctx,currUser.Name)
 	if err != nil {
 		return err
 	}
@@ -27,7 +26,7 @@ func HandlerFollowing(s *state.State, cmd command) error {
 	fmt.Println(feeds)
 
 
-	fmt.Printf("%s is following:\n",currUser)
+	fmt.Printf("%s is following:\n",currUser.Name)
 	for _, feed := range feeds {
 		fmt.Printf(" - %s\n", feed.FeedName)
 	}

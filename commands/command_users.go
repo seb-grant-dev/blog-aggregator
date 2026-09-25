@@ -7,7 +7,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/state"
 )
 
-func HandlerUsers(s *state.State, cmd command) error {
+func HandlerUsers(s *state.State, cmd Command) error {
 
 	if len(cmd.arguments) != 0 {
 		return fmt.Errorf("Get Users expects 0 arguments")

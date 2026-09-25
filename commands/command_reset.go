@@ -6,7 +6,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/state"
 )
 
-func HandlerReset(s *state.State, cmd command) error {
+func HandlerReset(s *state.State, cmd Command) error {
 	ctx := context.Background()
 	err := s.DB.Reset(ctx)
 	if err != nil {

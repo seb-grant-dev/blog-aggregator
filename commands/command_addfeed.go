@@ -11,19 +11,12 @@ import (
 )
 
 
-func HandlerAddFeed(s *state.State, cmd command) error{
+func HandlerAddFeed(s *state.State, cmd Command, currUser database.User) error{
 	if len(cmd.arguments) != 2 {
 		return fmt.Errorf("Error: adding a feed requires a <name> and a <url>");
 	}
 
 	ctx := context.Background()
-
-	currUser,err := s.DB.GetUser(ctx,s.Config.CurrentUserName)
-	if err != nil {
-		return err
-	}
-
-	fmt.Println(currUser)
 
 	addFeedParams := database.AddFeedParams{
 		ID: uuid.New(),

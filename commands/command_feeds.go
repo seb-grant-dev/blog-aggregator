@@ -7,7 +7,7 @@ import (
 )
 
 
-func HandlerFeeds(s *state.State, cmd command) error {
+func HandlerFeeds(s *state.State, cmd Command) error {
 
 	ctx := context.Background()
 

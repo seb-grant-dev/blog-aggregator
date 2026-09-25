@@ -9,7 +9,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/models"
 )
 
-func HandlerAgg(s *state.State, cmd command) error {
+func HandlerAgg(s *state.State, cmd Command) error {
 
 	ctx := context.Background()
 

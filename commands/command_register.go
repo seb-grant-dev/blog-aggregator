@@ -10,7 +10,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/internal/database"
 )
 
-func HandlerRegister(s *state.State, cmd command) error {
+func HandlerRegister(s *state.State, cmd Command) error {
 
 	if len(cmd.arguments) != 1 {
 		return fmt.Errorf("Register expects 1 argument <username>")

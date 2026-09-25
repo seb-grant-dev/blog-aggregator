@@ -10,6 +10,7 @@ import (
 	"github.com/seb-grant-dev/blog-aggregator/internal/database"
 	"github.com/seb-grant-dev/blog-aggregator/commands"
 	"github.com/seb-grant-dev/blog-aggregator/state"
+	"github.com/seb-grant-dev/blog-aggregator/internal/middleware"
 )
 
 func main() {
@@ -35,10 +36,10 @@ func main() {
 	commandRegistry.Register("reset",commands.HandlerReset)
 	commandRegistry.Register("users",commands.HandlerUsers)
 	commandRegistry.Register("agg",commands.HandlerAgg)
-	commandRegistry.Register("addfeed",commands.HandlerAddFeed)
+	commandRegistry.Register("addfeed",middleware.MiddlewareLoggedIn(commands.HandlerAddFeed))
 	commandRegistry.Register("feeds",commands.HandlerFeeds)
-	commandRegistry.Register("follow",commands.HandlerFollow)
-	commandRegistry.Register("following",commands.HandlerFollowing)
+	commandRegistry.Register("follow",middleware.MiddlewareLoggedIn(commands.HandlerFollow))
+	commandRegistry.Register("following",middleware.MiddlewareLoggedIn(commands.HandlerFollowing))
 
 
 	// Get the command name and arguments

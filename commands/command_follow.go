@@ -12,13 +12,12 @@ import (
 
 
 
-func HandlerFollow(s *state.State, cmd command) error {
+func HandlerFollow(s *state.State, cmd Command, currUser database.User) error {
 
 	if len(cmd.arguments) != 1 {
 		return fmt.Errorf("This command accepts a single argument <feed url>")
 	}
 
-	currUser := s.Config.CurrentUserName
 
 	ctx := context.Background()
 	newId := uuid.New()
@@ -27,14 +26,9 @@ func HandlerFollow(s *state.State, cmd command) error {
 		return err
 	}
 
-	user, err := s.DB.GetUser(ctx,currUser)
-	if err != nil {
-		return err
-	}
-
 	_, err = s.DB.FollowFeed(ctx, database.FollowFeedParams{
 		ID: newId,
-		UserID: user.ID,
+		UserID: currUser.ID,
 		FeedID: feed.ID,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -44,7 +38,7 @@ func HandlerFollow(s *state.State, cmd command) error {
 		return err
 	}
 
-	fmt.Printf("Success: %s is now following %s (%s)\n",user.Name,feed.Name,feed.Url)
+	fmt.Printf("Success: %s is now following %s (%s)\n",currUser.Name,feed.Name,feed.Url)
 
 	return nil
 
