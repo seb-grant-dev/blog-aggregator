@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 	"time"
-	"github.com/seb-grant-dev/blog-aggregator/state"
-	"github.com/seb-grant-dev/blog-aggregator/internal/feeds"
+	"github.com/seb-grant-dev/gator/state"
+	"github.com/seb-grant-dev/gator/internal/feeds"
 )
 
 func HandlerAgg(s *state.State, cmd Command) error {

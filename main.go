@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"os"
 	"database/sql"
-	"github.com/seb-grant-dev/blog-aggregator/internal/config"
-	"github.com/seb-grant-dev/blog-aggregator/internal/database"
-	"github.com/seb-grant-dev/blog-aggregator/commands"
-	"github.com/seb-grant-dev/blog-aggregator/state"
-	"github.com/seb-grant-dev/blog-aggregator/internal/middleware"
+	"github.com/seb-grant-dev/gator/internal/config"
+	"github.com/seb-grant-dev/gator/internal/database"
+	"github.com/seb-grant-dev/gator/commands"
+	"github.com/seb-grant-dev/gator/state"
+	"github.com/seb-grant-dev/gator/internal/middleware"
 )
 
 func main() {

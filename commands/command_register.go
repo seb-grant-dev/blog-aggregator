@@ -6,8 +6,8 @@ import (
 	"time"
 	"context"
 	"github.com/google/uuid"
-	"github.com/seb-grant-dev/blog-aggregator/state"
-	"github.com/seb-grant-dev/blog-aggregator/internal/database"
+	"github.com/seb-grant-dev/gator/state"
+	"github.com/seb-grant-dev/gator/internal/database"
 )
 
 func HandlerRegister(s *state.State, cmd Command) error {

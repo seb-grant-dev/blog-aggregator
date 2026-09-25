@@ -1,4 +1,4 @@
-module github.com/seb-grant-dev/blog-aggregator
+module github.com/seb-grant-dev/gator
 
 go 1.27.1
 

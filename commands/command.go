@@ -2,7 +2,7 @@ package commands
 
 import (
 	"fmt"
-	"github.com/seb-grant-dev/blog-aggregator/state"
+	"github.com/seb-grant-dev/gator/state"
 )
 
 type Command struct {

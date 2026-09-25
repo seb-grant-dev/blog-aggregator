@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"context"
-	"github.com/seb-grant-dev/blog-aggregator/state"
-	"github.com/seb-grant-dev/blog-aggregator/internal/database"
-	"github.com/seb-grant-dev/blog-aggregator/commands"
+	"github.com/seb-grant-dev/gator/state"
+	"github.com/seb-grant-dev/gator/internal/database"
+	"github.com/seb-grant-dev/gator/commands"
 )
 
 func MiddlewareLoggedIn(handler func(s *state.State, cmd commands.Command, user database.User) error) func (*state.State, commands.Command) error {

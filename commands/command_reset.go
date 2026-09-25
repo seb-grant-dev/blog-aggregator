@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 	"context"
-	"github.com/seb-grant-dev/blog-aggregator/state"
+	"github.com/seb-grant-dev/gator/state"
 )
 
 func HandlerReset(s *state.State, cmd Command) error {
