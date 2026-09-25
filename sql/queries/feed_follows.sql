@@ -34,3 +34,12 @@ FROM
   INNER JOIN feeds ON feeds.id = feed_follows.feed_id
 WHERE
   users.name = $1;
+
+
+-- name: UnfollowFeed :exec
+DELETE
+FROM
+  feed_follows
+WHERE
+  user_id = $1
+  AND feed_id = $2;

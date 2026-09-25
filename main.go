@@ -40,6 +40,7 @@ func main() {
 	commandRegistry.Register("feeds",commands.HandlerFeeds)
 	commandRegistry.Register("follow",middleware.MiddlewareLoggedIn(commands.HandlerFollow))
 	commandRegistry.Register("following",middleware.MiddlewareLoggedIn(commands.HandlerFollowing))
+	commandRegistry.Register("unfollow",middleware.MiddlewareLoggedIn(commands.HandlerUnfollow))
 
 
 	// Get the command name and arguments
