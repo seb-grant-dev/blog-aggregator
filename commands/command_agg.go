@@ -2,21 +2,34 @@ package commands
 
 import (
 	"fmt"
-	"context"
-	"html"
+	"time"
 	"github.com/seb-grant-dev/blog-aggregator/state"
 	"github.com/seb-grant-dev/blog-aggregator/internal/feeds"
-	"github.com/seb-grant-dev/blog-aggregator/models"
 )
 
 func HandlerAgg(s *state.State, cmd Command) error {
 
-	ctx := context.Background()
+	// ctx := context.Background()
 
-	feedUrl := "https://www.wagslane.dev/index.xml"
-	if len(cmd.arguments) == 1 {
-		feedUrl = cmd.arguments[0]
+	if len(cmd.arguments) != 1 {
+		return fmt.Errorf("Error: This command requires a duration, such as 30s, 2m, 1h etc")
 	}
+
+	time_between_reqs,err := time.ParseDuration(cmd.arguments[0])
+	fmt.Printf("Collecting feeds every %s\n",time_between_reqs)
+	if err != nil {
+		return err
+	}
+
+	ticker := time.NewTicker(time_between_reqs)
+	for ; ; <- ticker.C {
+		feeds.ScrapeFeeds(s)
+	}
+
+	return nil
+
+
+/*
 
 	feed, err := feeds.FetchFeed(ctx,feedUrl)
 	if err != nil {
@@ -44,4 +57,6 @@ func HandlerAgg(s *state.State, cmd Command) error {
 	fmt.Println(cleanFeed)
 
 	return nil
+
+	*/
 }

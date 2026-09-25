@@ -41,6 +41,7 @@ func main() {
 	commandRegistry.Register("follow",middleware.MiddlewareLoggedIn(commands.HandlerFollow))
 	commandRegistry.Register("following",middleware.MiddlewareLoggedIn(commands.HandlerFollowing))
 	commandRegistry.Register("unfollow",middleware.MiddlewareLoggedIn(commands.HandlerUnfollow))
+	commandRegistry.Register("browse",middleware.MiddlewareLoggedIn(commands.HandlerBrowse))
 
 
 	// Get the command name and arguments

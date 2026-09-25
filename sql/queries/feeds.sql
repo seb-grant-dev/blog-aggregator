@@ -46,3 +46,23 @@ FROM
 
 -- name: ResetFeeds :exec
 DELETE FROM feeds;
+
+
+-- name: MarkFeedFetched :exec
+UPDATE
+  feeds
+SET
+  last_fetched_at = $1,
+  updated_at = $2
+WHERE
+  feeds.id = $3;
+
+-- name: GetNextFeedToFetch :one
+SELECT
+  *
+FROM
+  feeds
+ORDER BY
+  last_fetched_at DESC
+LIMIT 1;
+
